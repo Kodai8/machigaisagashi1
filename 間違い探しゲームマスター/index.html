@@ -15,5 +15,14 @@
 
     <script src="js/init.js"></script>
     <script src="js/game.js"></script>
+    <script src="ncmb_js-3.1.2/ncmb.min.js"></script>
+    <script>
+      const APPLICATION_KEY = "636aef2e35259ad0d5f00ad3678b1da9903011e701ca89b9ebbbbad2638a3699";
+      const CLIENT_KEY = "aaa21a5938d162aed662ede49f639de5ed81c9cc43b0cf324f3b543c8d37edf7";
+      const ncmb = new NCMB(APPLICATION_KEY,CLIENT_KEY);
+      const DBName = "TestClass";
+
+      let TestClass = ncmb.DataStore(DBName);
+    </script>
 </body>
 </html>

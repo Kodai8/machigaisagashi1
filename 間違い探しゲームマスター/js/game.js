@@ -1,5 +1,5 @@
 let timer = null;
-const MAX = 3;
+const MAX = 1;
 let count=0;
 
 function init() {
@@ -28,8 +28,9 @@ function gameStart() {
         if(count<MAX){
           gameStart();
         }else{
+        save(timer);
+        load();
         clearTimeout(timer);
-        alert(timer-1);
       }
 
       }else{
@@ -54,4 +55,38 @@ function time() {
   let eTime = parseInt((now.getTime() - start.getTime())/1000);
   score.textContent = eTime;
   timer = setTimeout("time()", 1000);
+}
+
+
+
+function save(time) {
+let test = new TestClass();
+let key = "cleartime";
+let value = time;
+test.set(key, parseInt(value));
+test.save()
+.then (function(){
+  console.log('成功');
+})
+.catch(function(err){
+  console.log('エラー発生: '  + err);
+})
+}
+
+function load() {
+let test = new TestClass();
+TestClass.order("cleartime")
+.fetchAll()
+  .then(function(results){
+    let value = timer;
+    let object = parseInt(results[0].cleartime);
+    if(object > timer){
+      alert("High score:" + timer);
+    }else{
+      alert("Game Clear");
+    }
+  })
+  .catch(function(err){
+    console.log('エラー発生: '  + err);
+  });
 }
